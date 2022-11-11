@@ -3,7 +3,8 @@ package questions;
 import java.util.Arrays;
 
 /**
- *
+ * Abstract class that represents a Question, it has a question, an Answer and options. It implements the
+ * Question Interface
  */
 public abstract class AbstractQuestion implements Question {
 
@@ -56,9 +57,6 @@ public abstract class AbstractQuestion implements Question {
     public String getText() {
         return this.question;
     }
-
-
-    //Double Dispatch implementation
 
     /**
      * Double dispatch function to compare other objects to Likert

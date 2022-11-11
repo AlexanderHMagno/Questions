@@ -1,10 +1,12 @@
 package questions;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
+/**
+ * Abstract class that test the implementation of an AbstractQuestion class
+ */
 public class AbstractQuestionTest {
 
     private Question trueFalseTest;
@@ -13,6 +15,10 @@ public class AbstractQuestionTest {
     private Question likertTest;
 
 
+    /**
+     * Setting up some instances to test this implementation
+     * @throws Exception
+     */
     @org.junit.Before
     public void setUp() throws Exception {
         //Age
@@ -36,6 +42,9 @@ public class AbstractQuestionTest {
     public void testToString() {
     }
 
+    /**
+     * Test Answer method.
+     */
     @org.junit.Test
     public void testAnswer() {
 
@@ -53,6 +62,9 @@ public class AbstractQuestionTest {
 
     }
 
+    /**
+     * Test getText method.
+     */
     @org.junit.Test
     public void testGetText() {
 
@@ -70,6 +82,10 @@ public class AbstractQuestionTest {
 
     }
 
+    /**
+     * Check that the comparison among different classes follows the pattern
+     * trueFalse -> MultipleChoice -> MultipleSelect -> Likert
+     */
     @org.junit.Test
     public void testCompareTo() {
 
@@ -82,7 +98,7 @@ public class AbstractQuestionTest {
         assertEquals(-1, multipleChoiceTest.compareTo(multipleSelectTest));
 
         assertEquals(-1, multipleSelectTest.compareTo(likertTest));
-        assertEquals(-1, multipleSelectTest.compareTo(multipleChoiceTest));
+        assertEquals(1, multipleSelectTest.compareTo(multipleChoiceTest));
         assertEquals(1, multipleSelectTest.compareTo(trueFalseTest));
 
         assertEquals(1, likertTest.compareTo(trueFalseTest));
@@ -91,6 +107,9 @@ public class AbstractQuestionTest {
 
     }
 
+    /**
+     * Test that classes of the same type are sorting in alphabetical order
+     */
     @org.junit.Test
     public void testCompareToSameType() {
 
@@ -125,6 +144,12 @@ public class AbstractQuestionTest {
     }
 
 
+    /**
+     * Test that if we need to implement a Questionnaire we could sort our questions following
+     * two patters
+     *        a. trueFalse -> MultipleChoice -> MultipleSelect -> Likert
+     *        b. inside each class sort in alphabetical order
+     */
     @org.junit.Test
     public void testCompareQuestionnaire() {
 
@@ -198,6 +223,7 @@ public class AbstractQuestionTest {
                 "D-Likert",
         };
 
+        //Sort using double dispatch approach
         Collections.sort(questionnaire);
 
         for (int i = 0; i < correctOrder.length ; i++) {
