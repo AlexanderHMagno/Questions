@@ -14,7 +14,7 @@ public class TrueFalse extends AbstractQuestion {
      * @throws IllegalArgumentException if the provided answer is not a string equal to True or False
      */
     public TrueFalse(String question, String answer) throws IllegalArgumentException {
-        super(question, new String[]{answer} ,new String[]{"True","False"} );
+        super(question, answer ,"True","False");
 
         String[] valid = {"True","False"};
 

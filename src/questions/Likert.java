@@ -6,12 +6,11 @@ package questions;
 public class Likert extends AbstractQuestion{
 
     /**
-     * Constructor method, it expects a Questions and possible options
+     * Constructor method, it expects a Question
      * @param question Text to display as a question
-     * @param options Include the options to display as possible answers to this question.
      */
-    public Likert(String question, String[] options) {
-        super(question, options);
+    public Likert(String question) {
+        super(question,"","");
     }
 
     @Override

@@ -17,24 +17,22 @@ public class AbstractQuestionTest {
 
     /**
      * Setting up some instances to test this implementation
-     * @throws Exception
      */
     @org.junit.Before
-    public void setUp() throws Exception {
+    public void setUp() {
         //Age
         trueFalseTest = new TrueFalse("Are you younger than your father", "False");
 
         //Multiple Options
         String[] MCOptions = {"Waste Of time", "I should do other stuff", "Its ok", "Great","Amazing class"};
-        multipleChoiceTest = new MultipleChoice("How do you feel with the class", new String[]{"3"}, MCOptions);
+        multipleChoiceTest = new MultipleChoice("How do you feel with the class", "3", MCOptions);
 
         //Multiple Select
         String[] MSOptions = {"Monday", "June", "Thursday", "Mars","Sunday"};
-        multipleSelectTest = new MultipleSelect("Choose the invalid days of the week", new String[]{"2","4"}, MSOptions);
+        multipleSelectTest = new MultipleSelect("Choose the invalid days of the week", "2 4", MSOptions);
 
         //Likert
-        likertTest  = new Likert("How do you feel about NE?", MCOptions);
-
+        likertTest  = new Likert("How do you feel about NE?");
 
     }
 
@@ -53,12 +51,14 @@ public class AbstractQuestionTest {
         assertEquals(Question.CORRECT,multipleChoiceTest.answer("3"));
         assertEquals(Question.CORRECT,multipleSelectTest.answer("2 4"));
         assertEquals(Question.CORRECT,likertTest.answer(""));
+        assertEquals(Question.CORRECT,likertTest.answer("2"));
 
 
         //Incorrect
         assertEquals(Question.INCORRECT,trueFalseTest.answer("True"));
         assertEquals(Question.INCORRECT,multipleChoiceTest.answer("1"));
         assertEquals(Question.INCORRECT,multipleSelectTest.answer("2 4 5"));
+
 
     }
 
@@ -129,10 +129,10 @@ public class AbstractQuestionTest {
 
         String[] options = {"a", "b" , "c" , "d"};
         //Likert
-        Question orderL1 = new Likert("Are you younger than your father", options );
-        Question orderL2 = new Likert("Better tomorrow than today", options);
-        Question orderL3 = new Likert("Coffee better than water", options);
-        Question orderL4 = new Likert("You only live once?", options);
+        Question orderL1 = new Likert("Are you younger than your father");
+        Question orderL2 = new Likert("Better tomorrow than today");
+        Question orderL3 = new Likert("Coffee better than water");
+        Question orderL4 = new Likert("You only live once?");
 
         assertEquals(-1, orderL1.compareTo(orderL2));
         assertEquals(-1, orderL2.compareTo(orderL3));
@@ -153,14 +153,14 @@ public class AbstractQuestionTest {
     @org.junit.Test
     public void testCompareQuestionnaire() {
 
-        List<Question> questionnaire = new ArrayList<Question>();
+        List<Question> questionnaire = new ArrayList<>();
 
         String[] options = {"a", "b" , "c" , "d"};
 
-        Question order1L = new Likert("A-Likert", options );
-        Question order2L = new Likert("B-Likert", options);
-        Question order3L = new Likert("C-Likert", options);
-        Question order4L = new Likert("D-Likert", options);
+        Question order1L = new Likert("A-Likert");
+        Question order2L = new Likert("B-Likert");
+        Question order3L = new Likert("C-Likert");
+        Question order4L = new Likert("D-Likert");
 
         //TrueFalse
         Question order1TF = new TrueFalse("A-TF", "False");
@@ -170,17 +170,17 @@ public class AbstractQuestionTest {
 
         String[] solutionMC = {"a"};
         //MC
-        Question order1MC = new MultipleChoice("A-MC",solutionMC, options);
-        Question order2MC = new MultipleChoice("B-MC",solutionMC, options);
-        Question order3MC = new MultipleChoice("C-MC", solutionMC, options);
-        Question order4MC = new MultipleChoice("D-MC",solutionMC, options);
+        Question order1MC = new MultipleChoice("A-MC","a", options);
+        Question order2MC = new MultipleChoice("B-MC","b", options);
+        Question order3MC = new MultipleChoice("C-MC", "c", options);
+        Question order4MC = new MultipleChoice("D-MC","d", options);
 
         //Ms
         String[] solutionMS = {"a", "b"};
-        Question order1MS = new MultipleSelect("A-MS", solutionMS, options);
-        Question order2MS = new MultipleSelect("B-MS", solutionMS, options);
-        Question order3MS = new MultipleSelect("C-MS", solutionMS, options);
-        Question order4MS = new MultipleSelect("D-MS", solutionMS, options);
+        Question order1MS = new MultipleSelect("A-MS", "a b", options);
+        Question order2MS = new MultipleSelect("B-MS", "a b", options);
+        Question order3MS = new MultipleSelect("C-MS", "a b", options);
+        Question order4MS = new MultipleSelect("D-MS", "a b", options);
 
 
         questionnaire.add(order3L);

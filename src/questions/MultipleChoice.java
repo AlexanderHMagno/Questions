@@ -8,16 +8,16 @@ package questions;
 public class MultipleChoice extends MultipleSelect {
 
     /**
-     * Constructor method, it expects a Questions a unique answer and possible options
+     * Constructor method, it expects a Question a unique answer and possible options
      * @param question Text to display as a question
      * @param answer A unique answer is possible in this implementation.
      * @param options Include the options to display as possible answers to this question.
      * @throws IllegalArgumentException if the answer array size is greater than 1.
      */
-    public MultipleChoice(String question, String[] answer, String[] options) throws IllegalArgumentException {
+    public MultipleChoice(String question, String answer, String... options) throws IllegalArgumentException {
         super(question, answer, options);
 
-        if (answer.length > 1) {
+        if (answer.split(" ").length > 1) {
             throw new IllegalArgumentException("Please provide at most 1 answer, for multiple answers use MultipleSelect");
         }
     }
