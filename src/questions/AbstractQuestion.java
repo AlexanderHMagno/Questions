@@ -31,9 +31,6 @@ public abstract class AbstractQuestion implements Question {
         //If not Answer is provide
         if(answer.trim().length() == 0) return AbstractQuestion.INCORRECT;
 
-        //If not Answer provided
-        if (this.answer.length() == 0) return AbstractQuestion.CORRECT;
-
         //Else verify if the answer provided is equal to the initial answer
         String[] answerArray = answer.trim().split(" ");
         String[] validArray = this.answer.trim().split(" ");
