@@ -38,5 +38,4 @@ public class TrueFalse extends AbstractQuestion {
     protected int compareToTrueFalse(TrueFalse o) {
         return this.compareText(o);
     }
-
 }

@@ -36,9 +36,41 @@ public class AbstractQuestionTest {
 
     }
 
-    @org.junit.Test
-    public void testToString() {
+    /**
+     * Give 2 valid answer in multipleChoice
+     */
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testIllegalConstructor() {
+        Question IllegalMultipleAnswer = new MultipleChoice("Multiple","1 2", "a", "b","c");
     }
+
+    /**
+     * Give less than 3 options throw illegalArgumentException
+     */
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testIllegalConstructorOptions() {
+        Question IllegalMultipleAnswer = new MultipleChoice("Multiple","1", "a", "b");
+    }
+
+    /**
+     * Give more than 8 options throw illegalArgumentException
+     */
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testIllegalConstructorMaxedOptions() {
+        Question IllegalMultipleAnswer = new MultipleChoice(
+                "Multiple",
+                "1",
+                "a", "b", "c","d","e","f","g","t","z","w");
+    }
+
+    /**
+     * create a TrueFalse with an answer different than True or False
+     */
+    @org.junit.Test (expected = IllegalArgumentException.class)
+    public void testIllegalConstructorTrueFalse() {
+        Question IllegalMultipleAnswer = new TrueFalse("Is Sunday","No");
+    }
+
 
     /**
      * Test Answer method.
@@ -51,12 +83,17 @@ public class AbstractQuestionTest {
         assertEquals(Question.CORRECT,multipleChoiceTest.answer("3"));
         assertEquals(Question.CORRECT,multipleSelectTest.answer("2 4"));
         assertEquals(Question.CORRECT,likertTest.answer("2"));
+        assertEquals(Question.CORRECT,likertTest.answer("4"));
 
 
         //Incorrect
         assertEquals(Question.INCORRECT,trueFalseTest.answer("True"));
+        assertEquals(Question.INCORRECT,trueFalseTest.answer("Si"));
+        assertEquals(Question.INCORRECT,trueFalseTest.answer("Yes"));
         assertEquals(Question.INCORRECT,multipleChoiceTest.answer("1"));
+        assertEquals(Question.INCORRECT,multipleChoiceTest.answer("1 2 3"));
         assertEquals(Question.INCORRECT,multipleSelectTest.answer("2 4 5"));
+        assertEquals(Question.INCORRECT,multipleSelectTest.answer("2"));
         assertEquals(Question.INCORRECT,likertTest.answer(""));
 
     }
@@ -114,9 +151,13 @@ public class AbstractQuestionTest {
 
         //TrueFalse
         Question order1 = new TrueFalse("Are you younger than your father", "False");
+        Question order1b = new TrueFalse("Are you younger than your father", "True");
         Question order2 = new TrueFalse("Better tomorrow than today", "False");
         Question order3 = new TrueFalse("Coffee better than water", "False");
         Question order4 = new TrueFalse("You only live once?", "False");
+
+        assertEquals(0, order1b.compareTo(order1));
+        assertEquals(0, order1.compareTo(order1b));
 
         assertEquals(-1, order1.compareTo(order2));
         assertEquals(-1, order2.compareTo(order3));
@@ -126,7 +167,6 @@ public class AbstractQuestionTest {
         assertEquals(1, order3.compareTo(order2));
         assertEquals(1, order2.compareTo(order1));
 
-        String[] options = {"a", "b" , "c" , "d"};
         //Likert
         Question orderL1 = new Likert("Are you younger than your father");
         Question orderL2 = new Likert("Better tomorrow than today");
@@ -228,8 +268,5 @@ public class AbstractQuestionTest {
         for (int i = 0; i < correctOrder.length ; i++) {
             assertEquals(correctOrder[i], questionnaire.get(i).getText());
         }
-
-
     }
-
 }
