@@ -48,14 +48,14 @@ public abstract class AbstractQuestion implements Question {
     }
 
     /**
-     * Double dispatch function to compare other objects to Likert
+     * Double dispatch method to compare other objects to Likert
      * @param o The other object of type Likert to compare with this Question
      * @return An integer to indicate if the other element is lower or greater than this one
      */
     protected int compareToLikert (Likert o) {return 1;}
 
     /**
-     * Double dispatch function to compare other objects to MultipleSelect
+     * Double dispatch method to compare other objects to MultipleSelect
      * @param o The other object of type MultipleSelect to compare with this Question
      * @return An integer to indicate if this instances is lower or greater than the other one
      */
@@ -63,7 +63,7 @@ public abstract class AbstractQuestion implements Question {
         return (this instanceof Likert)? -1 : 1;
     }
     /**
-     * Double dispatch function to compare other objects to MultipleChoice
+     * Double dispatch method to compare other objects to MultipleChoice
      * @param o The other object of type MultipleChoice to compare with this Question
      * @return An integer to indicate if the other element is lower or greater than this one
      */
@@ -73,7 +73,7 @@ public abstract class AbstractQuestion implements Question {
 
 
     /**
-     * Double dispatch function to compare other objects to TrueFalse
+     * Double dispatch method to compare other objects to TrueFalse
      * @param o The other object of type TrueFalse to compare with this Question
      * @return An integer to indicate if the other element is lower or greater than this one
      */
