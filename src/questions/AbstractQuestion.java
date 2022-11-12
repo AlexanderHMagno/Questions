@@ -28,6 +28,9 @@ public abstract class AbstractQuestion implements Question {
     @Override
     public String answer(String answer) {
 
+        //If not Answer is provide
+        if(answer.trim().length() == 0) return AbstractQuestion.INCORRECT;
+
         //If not Answer provided
         if (this.answer.length() == 0) return AbstractQuestion.CORRECT;
 
@@ -88,6 +91,7 @@ public abstract class AbstractQuestion implements Question {
      * @return An integer to indicate if the other element is lower or greater than this one
      */
     protected int compareText (Question o) {
-        return o.getText().compareTo(this.getText()) > 0 ? 1 : -1;
+        int diff = o.getText().compareTo(this.getText());
+        return diff == 0 ? 0 : diff > 0 ? 1 : -1;
     }
 }

@@ -50,7 +50,6 @@ public class AbstractQuestionTest {
         assertEquals(Question.CORRECT,trueFalseTest.answer("False"));
         assertEquals(Question.CORRECT,multipleChoiceTest.answer("3"));
         assertEquals(Question.CORRECT,multipleSelectTest.answer("2 4"));
-        assertEquals(Question.CORRECT,likertTest.answer(""));
         assertEquals(Question.CORRECT,likertTest.answer("2"));
 
 
@@ -58,7 +57,7 @@ public class AbstractQuestionTest {
         assertEquals(Question.INCORRECT,trueFalseTest.answer("True"));
         assertEquals(Question.INCORRECT,multipleChoiceTest.answer("1"));
         assertEquals(Question.INCORRECT,multipleSelectTest.answer("2 4 5"));
-
+        assertEquals(Question.INCORRECT,likertTest.answer(""));
 
     }
 
